@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>561080720620-fpts6ntefj9plr0mamvdfjv1ai12fmtf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.561080720620-fpts6ntefj9plr0mamvdfjv1ai12fmtf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDK-By2VahBgPpoQIENjsvtRK-rlAb3GHo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>561080720620</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sbb.songbei</string>
+	<key>PROJECT_ID</key>
+	<string>songbei-99bd7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>songbei-99bd7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:561080720620:ios:00021679b1bdaafb8719c9</string>
+	<key>DATABASE_URL</key>
+	<string>https://songbei-99bd7.firebaseio.com</string>
+</dict>
+</plist>
