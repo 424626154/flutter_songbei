@@ -2,20 +2,24 @@
 
 松北生活圈
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+lib/app_config.dart
 
 
+```
+class AppConfig {
+  static const APP_NAME = '松北生活圈';
+  static const UMENG_ANDROID_KEY = '';
+  static const UMENG_IOS_KEY = '';
+  static const ANDROID_CHANNEL_FIR_IM = 'fir_im';
+  static const ANDROID_CHANNEL_GOOGLE_PLAY = 'google_play';
+//  static final ANDROID_CHANNEL = ANDROID_CHANNEL_FIR_IM;
+  static const ANDROID_CHANNEL = ANDROID_CHANNEL_GOOGLE_PLAY;
+  static const FIT_IM_ID = '';
+  static const FIT_IM_API_TOKEN = '';
+  static final IOS_APP_ID = '';//app store id
 
-./export.sh
+
+  static final BANNER_SCALE = 720/1280;
+}
+```
 
