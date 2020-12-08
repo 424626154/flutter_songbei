@@ -120,40 +120,7 @@ class _PageState extends State<SecondhandInfoPage> {
               ),
               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
               width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FlatButton.icon(
-                    onPressed: () {
-                      _onComment(_secondhandModel.id,0,'','','','编辑留言');
-                    },
-                    icon: Icon(
-                      Icons.favorite_outlined,
-                      color: Colors.white,
-                    ),
-                    label: Text('留言'),
-                    color: Colors.blueAccent,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
-                    textColor: Colors.white,
-                  ),
-                 Container(width: 10,),
-                  FlatButton.icon(
-                    onPressed: () {
-                      _onChat();
-                    },
-                    icon: Icon(
-                      Icons.favorite_outlined,
-                      color: Colors.white,
-                    ),
-                    label: Text('私信'),
-                    color: AppTheme.mainColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)),
-                    textColor: Colors.white,
-                  )
-                ],
-              ),
+              child: _buildBottomMenu(),
             ),
           )
         ],
@@ -243,6 +210,65 @@ class _PageState extends State<SecondhandInfoPage> {
       );
     } else {
       return Container();
+    }
+  }
+
+  Widget _buildBottomMenu(){
+    if(_secondhandModel.userid == Provider.of<App>(context).userid){
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FlatButton.icon(
+            onPressed: () {
+              _onDel();
+            },
+            icon: Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+            label: Text('删除'),
+            color: AppTheme.mainColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            textColor: Colors.white,
+          )
+        ],
+      );
+    }else{
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FlatButton.icon(
+            onPressed: () {
+              _onComment(_secondhandModel.id,0,'','','','编辑留言');
+            },
+            icon: Icon(
+              Icons.favorite_outlined,
+              color: Colors.white,
+            ),
+            label: Text('留言'),
+            color: Colors.blueAccent,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            textColor: Colors.white,
+          ),
+          Container(width: 10,),
+          FlatButton.icon(
+            onPressed: () {
+              _onChat();
+            },
+            icon: Icon(
+              Icons.favorite_outlined,
+              color: Colors.white,
+            ),
+            label: Text('私信'),
+            color: AppTheme.mainColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            textColor: Colors.white,
+          )
+        ],
+      );
     }
   }
 
@@ -367,6 +393,33 @@ class _PageState extends State<SecondhandInfoPage> {
     });
   }
 
+  void _onDel(){
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('删除二手物品'),
+            content: Container(
+              child: Text('是否确认删除?'),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text('取消'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                  child: const Text('确认'),
+                  onPressed: () {
+                    _reqDelete();
+                    Navigator.of(context).pop();
+                  }),
+            ],
+          );
+        });
+  }
+
   void _requestFloow(String fansid){
     CHttp.post(
         CHttp.USER_FOLLOWINFO,
@@ -379,6 +432,23 @@ class _PageState extends State<SecondhandInfoPage> {
         },
         params:
         PFollowUser(Provider.of<App>(context, listen: false).userid, fansid).toJson(),
+        errorCallback: (err) {
+          ToastUtil.showToast(context, err);
+        });
+  }
+
+  void _reqDelete(){
+    CHttp.post(
+        CHttp.SECONDHAND_DEL,
+            (data) {
+          if (!mounted) {
+            return;
+          }
+          Navigator.of(context).pop();
+          ToastUtil.showToast(context, '删除成功!');
+        },
+        params:
+        PDel(Provider.of<App>(context, listen: false).userid, _secondhandModel.id).toJson(),
         errorCallback: (err) {
           ToastUtil.showToast(context, err);
         });

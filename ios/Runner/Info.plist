@@ -32,9 +32,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>使用相机拍摄照片编辑内容，是否可以使用相机？</string>
+	<string>使用相机拍摄照片用于发帖，是否可以使用相机？</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>使用相机拍摄视频编辑内容，是否可以使用麦克风？</string>
+	<string>使用相机拍摄视频用于发帖，是否可以使用麦克风？</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>使用写入图片保存图片，是否可以使用写入图片？</string>
 	<key>NSPhotoLibraryUsageDescription</key>

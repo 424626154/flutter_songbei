@@ -23,3 +23,6 @@ class AppConfig {
 }
 ```
 
+##App截图
+![image](gitres/5.5/screen01.png)
+

@@ -213,10 +213,10 @@ class PPoem extends Params{
       };
 }
 
-class PDelPoem extends Params{
+class PDel extends Params{
   String userid ;
   int id;
-  PDelPoem(this.userid,this.id);
+  PDel(this.userid,this.id);
   //dynamic
   Map<String, dynamic> toJson() =>
       {
