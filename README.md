@@ -24,5 +24,5 @@ class AppConfig {
 ```
 
 ##App截图
-![image](gitres/5.5/screen01.png)
+![image](https://github.com/424626154/flutter_songbei/blob/main/gitres/5.5/screen01.png)
 
