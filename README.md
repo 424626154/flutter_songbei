@@ -23,6 +23,12 @@ class AppConfig {
 }
 ```
 
-##App截图
+## App截图
 ![image](https://github.com/424626154/flutter_songbei/blob/main/gitres/5.5/screen01.png)
+![image](https://github.com/424626154/flutter_songbei/blob/main/gitres/5.5/screen02.png)
+![image](https://github.com/424626154/flutter_songbei/blob/main/gitres/5.5/screen03.png)
+
+## 相关文章
+[Wiki](https://github.com/424626154/flutter_songbei/wiki)
+
 
