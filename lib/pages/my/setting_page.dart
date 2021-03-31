@@ -186,8 +186,8 @@ class _SettingState extends State<SettingPage> {
   }
 
   void _onLogout() {
-//    JPush jpush = new JPush();
-//    jpush.stopPush();
+   // JPush jpush = new JPush();
+   // jpush.stopPush();
     AppShared.getUserid().then((userid) {
       if (userid != null && userid.length > 0) {
         _reqPushId(userid, '');

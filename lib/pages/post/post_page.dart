@@ -20,7 +20,7 @@ import 'package:flutter_songbei/utils/app_util.dart';
 import 'package:flutter_songbei/utils/toast_util.dart';
 import 'package:provider/provider.dart';
 
-import '../../AppEnums.dart';
+import '../../app_enums.dart';
 import '../../app_theme.dart';
 import '../photos_gallery_page.dart';
 
@@ -756,7 +756,7 @@ class _PageState extends State<PostPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ReportPage('举报想法', post.userid,post.id, 3)));
+                        builder: (context) => ReportPage('举报帖子',post.id, post.userid, 3)));
   }
 
   void _requestDiscuss() {

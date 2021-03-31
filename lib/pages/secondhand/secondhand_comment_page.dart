@@ -7,7 +7,7 @@ import 'package:flutter_songbei/provider/user.dart';
 import 'package:flutter_songbei/utils/toast_util.dart';
 import 'package:provider/provider.dart';
 
-import '../../AppEnums.dart';
+import '../../app_enums.dart';
 import '../../app_theme.dart';
 
 class SecondhandCommentPage extends StatefulWidget {

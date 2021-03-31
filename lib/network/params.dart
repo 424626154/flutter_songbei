@@ -200,6 +200,21 @@ class PSetPri extends Params {
   }
 }
 
+class PBlack extends Params {
+  String userid;
+
+  String buserid;
+
+  PBlack(this.userid, this.buserid);
+
+  //dynamic
+  Map<String, dynamic> toJson() => {
+    'userid': userid,
+    'buserid': buserid,
+    'os': os,
+  };
+}
+
 class PPoem extends Params{
   String userid ;
   int pid;

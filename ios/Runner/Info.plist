@@ -38,7 +38,9 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>使用写入图片保存图片，是否可以使用写入图片？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>使用相册照片编辑内容，是否可以使用相册？</string>
+	<string>使用相册照片用于发帖，是否可以使用相册？</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>使用语言识别获取语言信息，是否可以使用语言识别？</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

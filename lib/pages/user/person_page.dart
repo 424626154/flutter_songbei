@@ -12,6 +12,7 @@ import 'package:flutter_songbei/network/chttp.dart';
 import 'package:flutter_songbei/network/params.dart';
 import 'package:flutter_songbei/network/tag.dart';
 import 'package:flutter_songbei/pages/message_center/chat_page.dart';
+import 'package:flutter_songbei/pages/my/report_page.dart';
 import 'package:flutter_songbei/provider/app.dart';
 import 'package:flutter_songbei/provider/user.dart';
 import 'package:flutter_songbei/utils/app_util.dart';
@@ -35,7 +36,7 @@ class PersonPage extends StatefulWidget {
   }
 }
 
-class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
+class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin {
   String userid;
   User user;
 
@@ -73,15 +74,15 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
 //        title: Text('个人信息'),
 //        centerTitle: true,
 //      ),
-      backgroundColor:AppTheme.mainColor,
+      backgroundColor: AppTheme.mainColor,
       body: SafeArea(
         child: Container(
           color: Colors.white,
           child: NestedScrollView(
-            headerSliverBuilder:(context, innerScrolled) => <Widget>[
+            headerSliverBuilder: (context, innerScrolled) => <Widget>[
               SliverAppBar(
                 backgroundColor: AppTheme.mainColor,
-                leading:  GestureDetector(
+                leading: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
                   },
@@ -89,19 +90,71 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
                 ),
                 elevation: 0,
                 automaticallyImplyLeading: false,
-                title:  Text('个人信息'),
-                centerTitle: true, // 标题居中
-                expandedHeight: 385.0, // 展开高度
-                floating: true, // 随着滑动隐藏标题
-                pinned: true, // 固定在顶部
+                title: Text('个人信息'),
+                centerTitle: true,
+                // 标题居中
+                expandedHeight: 385.0,
+                // 展开高度
+                floating: true,
+                // 随着滑动隐藏标题
+                pinned: true,
+                // 固定在顶部
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
-                  background:  Container(
-                    margin:  EdgeInsets.only(top: kToolbarHeight),
+                  background: Container(
+                    margin: EdgeInsets.only(top: kToolbarHeight),
                     color: Colors.white,
                     child: _buildUser(),
                   ),
                 ),
+                actions: <Widget>[
+                  PopupMenuButton(
+                    itemBuilder: (BuildContext context) =>
+                        <PopupMenuItem<String>>[
+                      PopupMenuItem<String>(value: 'report', child: Text('举报')),
+                      PopupMenuItem<String>(value: 'pullblack', child: Text('拉黑')),
+                    ],
+                    onSelected: (value) {
+                      switch (value) {
+                        case 'report':
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ReportPage('举报用户',0,userid,2)));
+                          break;
+                        case 'pullblack':
+                          showDialog(context: context,
+                              builder: (context) {
+                                return AlertDialog(title: Text('拉黑', style: TextStyle(color: Colors.redAccent)),
+                                    content: Container(
+//                    height: MediaQuery.of(context).size.height/2,
+                                      child: SingleChildScrollView(
+                                        child: Container(
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Text(
+                                            '是否确认将[${user.nickname}]拉黑?',
+                                            style: TextStyle(
+                                                fontSize: 18.0
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(child: Text("取消"), onPressed: () => {
+                                        Navigator.of(context).pop()
+                                      }),
+                                      FlatButton(child: Text("确认"), onPressed: (){
+                                        _onPullblack();
+                                        Navigator.of(context).pop();
+                                      }),
+                                    ]);
+                              });
+                          break;
+                      }
+                    },
+                  )
+                ],
               ),
               SliverPersistentHeader(
                 pinned: true,
@@ -136,7 +189,7 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
   }
 
   Widget _buildUser() {
-    if(user != null){
+    if (user != null) {
       return Stack(
         children: <Widget>[
           Padding(
@@ -146,11 +199,10 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
               width: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [AppTheme.mainColor, AppTheme.mainLightestColor],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  )
-              ),
+                colors: [AppTheme.mainColor, AppTheme.mainLightestColor],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,12 +220,16 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       var index = 0;
-                      List<PhotoGalleryModel> gallery_photos = List<PhotoGalleryModel>();
+                      List<PhotoGalleryModel> gallery_photos =
+                          List<PhotoGalleryModel>();
                       gallery_photos.add(PhotoGalleryModel(user.head));
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => PhotosGalleryPage(gallery_photos,index)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PhotosGalleryPage(gallery_photos, index)));
                     },
                   ),
                   Padding(
@@ -279,37 +335,36 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
           )
         ],
       );
-    }else{
+    } else {
       return Container();
     }
   }
 
   Widget _buildPosts() {
-    return  ListView.separated(
+    return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         var post = posts[index];
         return MyPostListItem(post);
       },
       itemCount: posts.length,
       separatorBuilder: (context, index) {
-        return Divider(
-            height: 0.5,
-            indent: 0,
-            color: Colors.grey.shade300
-        );
+        return Divider(height: 0.5, indent: 0, color: Colors.grey.shade300);
       },
     );
   }
 
-  Widget _buildDating(){
-    if(_datingModel != null){
+  Widget _buildDating() {
+    if (_datingModel != null) {
       return SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
-              Text('个人资料',style: TextStyle(fontSize: 16),),
-              DatingItem('性别',UIManager.getDatingGenderStr(_datingModel)),
+              Text(
+                '个人资料',
+                style: TextStyle(fontSize: 16),
+              ),
+              DatingItem('性别', UIManager.getDatingGenderStr(_datingModel)),
               DatingItem('年龄', UIManager.getDatingAgeStr(_datingModel)),
               DatingItem('身高', UIManager.getDatingHeightStr(_datingModel)),
               DatingItem('体重', UIManager.getDatingWeightStr(_datingModel)),
@@ -329,9 +384,7 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
                       '自我描述',
                       style: TextStyle(fontSize: 18),
                     ),
-                    Text(
-                        _datingModel.self_describe
-                    )
+                    Text(_datingModel.self_describe)
                   ],
                 ),
               ),
@@ -339,7 +392,7 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
           ),
         ),
       );
-    }else{
+    } else {
       return Container();
     }
   }
@@ -400,12 +453,10 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
         });
   }
 
-
-
-  void _reqPosts(){
+  void _reqPosts() {
     CHttp.post(
         CHttp.DISCUSS_MYDISCUSS,
-            (data) {
+        (data) {
           if (!mounted) {
             return;
           }
@@ -420,16 +471,14 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
         errorCallback: (err) {
           LogUtil.e(err, tag: Tag.TAG_ERROR);
         },
-        completeCallback: () {
-
-        });
+        completeCallback: () {});
   }
 
   void _reqDatingInfo() {
     print('-----userid:${Provider.of<App>(context, listen: false).userid}');
     CHttp.post(
         CHttp.DATING_MYINFO,
-            (data) {
+        (data) {
           if (!mounted) {
             return;
           }
@@ -440,7 +489,22 @@ class _PageState extends State<PersonPage> with SingleTickerProviderStateMixin{
           setState(() {});
         },
         params: POther(
-            Provider.of<App>(context, listen: false).userid, widget.userid)
+                Provider.of<App>(context, listen: false).userid, widget.userid)
+            .toJson(),
+        errorCallback: (err) {
+          ToastUtil.showToast(context, err);
+        },
+        completeCallback: () {});
+  }
+
+  void _onPullblack(){
+    CHttp.post(
+        CHttp.USER_PUSHBLACK,
+            (data) {
+          setState(() {});
+          ToastUtil.showToast(context, '拉黑成功');
+        },
+        params: PBlack(Provider.of<App>(context, listen: false).userid, userid)
             .toJson(),
         errorCallback: (err) {
           ToastUtil.showToast(context, err);
@@ -466,9 +530,9 @@ class _SilverAppBarDelegate extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade200, width: 1.0))
-      ),
+          color: Colors.white,
+          border: Border(
+              bottom: BorderSide(color: Colors.grey.shade200, width: 1.0))),
       child: _tabBar,
     );
   }

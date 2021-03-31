@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_songbei/AppEnums.dart';
+import 'package:flutter_songbei/app_enums.dart';
 import 'package:flutter_songbei/custom/listitem/star_post_list_item.dart';
 import 'package:flutter_songbei/models/post_model.dart';
 import 'package:flutter_songbei/network/chttp.dart';

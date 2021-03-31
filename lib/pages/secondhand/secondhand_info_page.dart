@@ -17,7 +17,7 @@ import 'package:flutter_songbei/utils/app_util.dart';
 import 'package:flutter_songbei/utils/toast_util.dart';
 import 'package:provider/provider.dart';
 
-import '../../AppEnums.dart';
+import '../../app_enums.dart';
 import '../../app_theme.dart';
 import '../photos_gallery_page.dart';
 import 'secondhand_comment_page.dart';

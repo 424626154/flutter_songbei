@@ -39,13 +39,13 @@ class PostListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ListUser(item.userid, item.head, item.nickname,item.time),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                child: Text(
-                  item.title,
-                  style: TextStyle(fontSize: 22, color: Colors.black87),
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+              //   child: Text(
+              //     item.title,
+              //     style: TextStyle(fontSize: 22, color: Colors.black87),
+              //   ),
+              // ),
               PostItem(item),
               _buildMenu(context,item),
             ],

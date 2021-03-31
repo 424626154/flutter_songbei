@@ -7,8 +7,8 @@ import 'package:dio/dio.dart';
 import 'tag.dart';
 
 class CHttp {
-  static String BASE_URL = 'http://192.168.1.4:9401/';
-  // static String BASE_URL = 'http://songbei.zanzhe580.com/';
+  // static String BASE_URL = 'http://192.168.1.4:9401/';
+  static String BASE_URL = 'http://songbei.zanzhe580.com/';
   static String USER_LOGIN = 'user/login';
   static String USER_LOGOUT = 'user/logout';
   static String USER_REGISTER = 'user/register';
@@ -27,6 +27,7 @@ class CHttp {
   static String USER_PRIVILEGES = 'user/privileges';
   static String USER_SETPRI = 'user/setpri';
   static String REPORT = 'user/report';
+  static String USER_PUSHBLACK = 'user/pullblack';
 
 
 
